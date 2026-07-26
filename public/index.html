@@ -1,0 +1,391 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Clinical Triage Agent — Demo</title>
+    <style>
+      :root {
+        --navy-900: #0b1f33;
+        --navy-800: #102a44;
+        --navy-700: #14365a;
+        --teal: #0f9b8e;
+        --teal-soft: #e6f5f3;
+        --ink: #16222e;
+        --muted: #5d6b78;
+        --line: #dde5ec;
+        --bg: #f4f7fa;
+        --card: #ffffff;
+        --emerg: #d12b2b;
+        --emerg-bg: #fdecec;
+        --urgent: #c67a00;
+        --urgent-bg: #fdf3e0;
+        --routine: #0f7a9b;
+        --routine-bg: #e4f3f8;
+        --self: #2e7d4f;
+        --self-bg: #e7f4ec;
+        --radius: 12px;
+        --shadow: 0 1px 2px rgba(16, 42, 68, 0.04),
+          0 8px 24px rgba(16, 42, 68, 0.06);
+      }
+      * { box-sizing: border-box; }
+      html, body { margin: 0; }
+      body {
+        font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI",
+          Roboto, Helvetica, Arial, sans-serif;
+        color: var(--ink);
+        background: var(--bg);
+        line-height: 1.5;
+        -webkit-font-smoothing: antialiased;
+      }
+      .topbar {
+        background: linear-gradient(120deg, var(--navy-900), var(--navy-700));
+        color: #fff;
+        padding: 18px 0;
+        border-bottom: 3px solid var(--teal);
+      }
+      .topbar .wrap { display: flex; align-items: center; gap: 14px; }
+      .logo {
+        width: 38px; height: 38px; border-radius: 10px;
+        background: var(--teal); display: grid; place-items: center;
+        font-weight: 800; color: #fff; font-size: 18px;
+        box-shadow: 0 0 0 4px rgba(15, 155, 142, 0.18);
+      }
+      .topbar h1 { font-size: 18px; margin: 0; letter-spacing: 0.2px; }
+      .topbar .sub { font-size: 13px; opacity: 0.82; margin-top: 2px; }
+      .badge-demo {
+        margin-left: auto; font-size: 11px; font-weight: 700;
+        letter-spacing: 0.08em; text-transform: uppercase;
+        background: rgba(255, 255, 255, 0.12); color: #cdeede;
+        padding: 6px 10px; border-radius: 999px; border: 1px solid rgba(255,255,255,0.18);
+      }
+      .wrap { max-width: 920px; margin: 0 auto; padding: 0 20px; }
+      .disclaimer-banner {
+        background: var(--emerg-bg);
+        border: 1px solid #f3c9c9;
+        color: #7a1818;
+        border-radius: var(--radius);
+        padding: 12px 16px; margin: 18px auto; max-width: 920px;
+        font-size: 13.5px; display: flex; gap: 10px; align-items: flex-start;
+      }
+      .disclaimer-banner strong { color: #7a1818; }
+      main { padding: 8px 0 56px; }
+      .card {
+        background: var(--card); border: 1px solid var(--line);
+        border-radius: var(--radius); box-shadow: var(--shadow);
+        padding: 22px; margin-bottom: 18px;
+      }
+      label.lbl { display: block; font-weight: 700; font-size: 13px;
+        color: var(--navy-800); margin-bottom: 8px; letter-spacing: 0.02em; }
+      textarea#symptom {
+        width: 100%; min-height: 88px; resize: vertical;
+        border: 1.5px solid var(--line); border-radius: 10px;
+        padding: 12px 14px; font-size: 15px; font-family: inherit;
+        color: var(--ink); background: #fff; transition: border-color 0.15s;
+      }
+      textarea#symptom:focus { outline: none; border-color: var(--teal);
+        box-shadow: 0 0 0 3px rgba(15, 155, 142, 0.14); }
+      .row { display: flex; gap: 12px; align-items: center; margin-top: 14px; flex-wrap: wrap; }
+      button#go {
+        background: var(--navy-800); color: #fff; border: none;
+        border-radius: 10px; padding: 11px 22px; font-size: 15px;
+        font-weight: 700; cursor: pointer; transition: background 0.15s;
+      }
+      button#go:hover { background: var(--navy-900); }
+      button#go:disabled { opacity: 0.6; cursor: progress; }
+      .examples { display: flex; gap: 8px; flex-wrap: wrap; }
+      .chip {
+        font-size: 12px; background: var(--teal-soft); color: #0b6f66;
+        border: 1px solid #cdeae6; border-radius: 999px; padding: 6px 12px;
+        cursor: pointer; font-weight: 600;
+      }
+      .chip:hover { background: #d6f0ec; }
+      .hint { font-size: 12.5px; color: var(--muted); }
+
+      .esc-banner {
+        display: none; background: var(--emerg); color: #fff;
+        border-radius: var(--radius); padding: 16px 18px; margin-bottom: 16px;
+        font-weight: 700; box-shadow: var(--shadow);
+        align-items: center; gap: 12px;
+      }
+      .esc-banner.show { display: flex; }
+      .esc-banner .icon { font-size: 22px; }
+
+      .triage-line { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; }
+      .pill {
+        font-size: 13px; font-weight: 800; letter-spacing: 0.06em;
+        padding: 8px 14px; border-radius: 999px; text-transform: uppercase;
+      }
+      .pill.EMERGENCY { background: var(--emerg-bg); color: var(--emerg); border: 1px solid #f0c3c3; }
+      .pill.URGENT_CARE { background: var(--urgent-bg); color: var(--urgent); border: 1px solid #f1d9ad; }
+      .pill.ROUTINE { background: var(--routine-bg); color: var(--routine); border: 1px solid #b6dde9; }
+      .pill.SELF_CARE { background: var(--self-bg); color: var(--self); border: 1px solid #c3e3cd; }
+      .safety-tag { font-size: 12px; color: var(--muted); font-weight: 600; }
+
+      section h2 {
+        font-size: 13px; text-transform: uppercase; letter-spacing: 0.08em;
+        color: var(--muted); margin: 22px 0 10px; font-weight: 700;
+      }
+      ul.clean { list-style: none; padding: 0; margin: 0; }
+      ul.clean li { padding: 8px 0; border-bottom: 1px dashed var(--line); }
+      ul.clean li:last-child { border-bottom: none; }
+      ul.clean li.red { color: #8a1f1f; font-weight: 600; }
+
+      .cite { display: inline-flex; align-items: center; gap: 6px;
+        font-size: 12px; color: var(--muted); margin-top: 4px; }
+      .cite .src {
+        background: var(--teal-soft); color: #0b6f66;
+        border: 1px solid #cdeae6; border-radius: 6px;
+        padding: 1px 7px; font-weight: 700;
+      }
+      .cite .src.nosrc { background: #f0e9df; color: #8a6a2b; border-color: #e4d6bf; }
+
+      .fhir-grid { display: grid; gap: 8px; }
+      .fhir-item { background: #f8fafc; border: 1px solid var(--line);
+        border-radius: 8px; padding: 8px 12px; font-size: 13.5px; }
+      .fhir-item b { color: var(--navy-800); }
+
+      #results { display: none; }
+      #results.show { display: block; }
+      #loading { display: none; color: var(--muted); font-size: 14px; }
+      #loading.show { display: block; }
+      .spinner {
+        display: inline-block; width: 14px; height: 14px;
+        border: 2px solid var(--line); border-top-color: var(--teal);
+        border-radius: 50%; animation: spin 0.8s linear infinite; vertical-align: -2px;
+        margin-right: 8px;
+      }
+      @keyframes spin { to { transform: rotate(360deg); } }
+      .err { color: var(--emerg); font-size: 14px; }
+      footer { font-size: 12px; color: var(--muted); text-align: center; padding: 18px; }
+      code, pre { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; }
+      .kv { font-size: 13px; color: var(--muted); }
+    </style>
+  </head>
+  <body>
+    <div class="topbar">
+      <div class="wrap">
+        <div class="logo">✚</div>
+        <div>
+          <h1>Clinical Triage Agent</h1>
+          <div class="sub">FHIR R4 · Retrieval-grounded · Safety-routed · GLM-5.2 (Z.AI)</div>
+        </div>
+        <span class="badge-demo">Synthetic demo</span>
+      </div>
+    </div>
+
+    <div class="disclaimer-banner">
+      <span>⚠️</span>
+      <div>
+        <strong>Not for real clinical use.</strong> This is a public portfolio demo
+        with fully synthetic data and a non-diagnostic triage assistant. It does not
+        replace a clinician. In a real emergency, call 911 (or your local emergency number).
+      </div>
+    </div>
+
+    <main class="wrap">
+      <div class="card">
+        <label class="lbl" for="symptom">Describe the symptom or complaint</label>
+        <textarea id="symptom" placeholder='e.g. "crushing chest pain radiating to my left arm with sweating and shortness of breath"'></textarea>
+        <div class="row">
+          <button id="go">Triage →</button>
+          <div class="examples" id="examples">
+            <span class="chip" data-q="crushing chest pain radiating to my left arm with sweating">Chest pain (red flag)</span>
+            <span class="chip" data-q="sudden drooping on one side of my face and slurred speech">Stroke (F.A.S.T.)</span>
+            <span class="chip" data-q="lips and tongue are swelling and I'm wheezing after a bee sting">Anaphylaxis</span>
+            <span class="chip" data-q="I've had a sore throat and mild cough for two days">Cold (self-care)</span>
+            <span class="chip" data-q="I want to hurt myself">Suicidal ideation</span>
+          </div>
+        </div>
+        <div class="row">
+          <span class="hint">Every clinical claim is cited to a guideline source. Uncited claims defer to a clinician.</span>
+        </div>
+      </div>
+
+      <div id="loading"><span class="spinner"></span>Reading FHIR context, retrieving guidelines, and reasoning with GLM-5.2…</div>
+      <div id="error" class="err"></div>
+
+      <div id="results">
+        <div class="esc-banner" id="escBanner">
+          <span class="icon">🚨</span>
+          <span id="escText">Call 911 / emergency services now.</span>
+        </div>
+
+        <div class="card">
+          <div class="triage-line">
+            <span class="pill" id="triagePill">—</span>
+            <span class="safety-tag" id="safetyTag"></span>
+          </div>
+          <section>
+            <h2>Red flags &amp; escalation</h2>
+            <ul class="clean" id="redFlags"><li class="hint">None flagged.</li></ul>
+          </section>
+        </div>
+
+        <div class="card">
+          <section>
+            <h2>Cited reasoning</h2>
+            <ul class="clean" id="reasoning"></ul>
+          </section>
+        </div>
+
+        <div class="card">
+          <section>
+            <h2>FHIR context used (synthetic)</h2>
+            <div class="fhir-grid" id="fhirUsed"></div>
+          </section>
+        </div>
+
+        <div class="card">
+          <div class="disclaimer" id="disclaimer"></div>
+          <div class="kv" id="meta" style="margin-top:8px"></div>
+        </div>
+      </div>
+    </main>
+
+    <footer>
+      Clinical Triage Agent — portfolio demo by
+      <a href="https://github.com/Pu11en" target="_blank" rel="noopener">Pu11en</a>.
+      Synthetic data only · not a medical device · GLM-5.2 via Z.AI.
+    </footer>
+
+    <script>
+      const $ = (id) => document.getElementById(id);
+      const esc = (s) => String(s ?? "").replace(/[&<>"']/g, (c) =>
+        ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+
+      const SOURCES = {
+        "acs-chest-pain": "AHA/ACC Chest Pain",
+        "stroke-fast": "ASA — F.A.S.T.",
+        "anaphylaxis": "WAO Anaphylaxis",
+        "pulmonary-embolism": "ESC PE",
+        "severe-respiratory-distress": "ATS Resp. Failure",
+        "suicidal-ideation": "SAMHSA / Columbia",
+        "asthma-exacerbation": "GINA Asthma",
+        "copd-exacerbation": "GOLD COPD",
+        "sepsis": "Surviving Sepsis",
+        "hypertensive-emergency": "AHA Hypertension",
+        "dka": "ADA — DKA",
+        "hypoglycemia": "ADA — Hypoglycemia",
+        "gi-bleed": "ACG GI Bleed",
+        "appendicitis": "ACEP Appendicitis",
+        "pyelonephritis": "IDSA UTI",
+        "meningitis": "WHO Meningitis",
+        "thunderclap-headache": "ASA — SAH",
+        "ectopic-pregnancy": "ACOG Ectopic",
+        "cauda-equina": "NICE Low Back Pain",
+        "htn-routine": "AHA/ACC Hypertension",
+        "diabetes-routine": "ADA Standards",
+        "hyperlipidemia-routine": "AHA/ACC Cholesterol",
+        "uri-common-cold": "CDC Common Cold",
+        "minor-wound": "CDC Wound Care",
+        "gastroenteritis": "WHO Diarrheal Disease",
+      };
+
+      function sourceLabel(src) {
+        if (!src || src === "no source") return { text: "no source", nosrc: true };
+        return { text: SOURCES[src] || src, nosrc: false };
+      }
+
+      document.querySelectorAll("#examples .chip").forEach((c) =>
+        c.addEventListener("click", () => {
+          $("symptom").value = c.dataset.q;
+          $("symptom").focus();
+        })
+      );
+
+      async function run() {
+        const symptom = $("symptom").value.trim();
+        if (!symptom) { $("symptom").focus(); return; }
+
+        $("error").textContent = "";
+        $("results").classList.remove("show");
+        $("loading").classList.add("show");
+        $("go").disabled = true;
+
+        try {
+          const res = await fetch("/api/triage", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ symptom }),
+          });
+          const data = await res.json();
+          if (!res.ok) throw new Error(data.detail || data.error || "Request failed");
+          render(data, symptom);
+        } catch (e) {
+          $("error").textContent = "Error: " + e.message;
+        } finally {
+          $("loading").classList.remove("show");
+          $("go").disabled = false;
+        }
+      }
+
+      function render(r, symptom) {
+        const pill = $("triagePill");
+        pill.className = "pill " + r.triage;
+        pill.textContent = r.triage.replace("_", " ");
+        $("safetyTag").textContent =
+          "frozen safety node " + (r.meta.frozenSafetyEngaged ? "engaged" : "not engaged") +
+          " · model " + r.meta.model;
+
+        // emergency escalation banner
+        const escBanner = $("escBanner");
+        if (r.triage === "EMERGENCY") {
+          const first = r.redFlags.find((x) => /911|emergency/i.test(x)) ||
+            "Call 911 / emergency services now.";
+          $("escText").textContent = first;
+          escBanner.classList.add("show");
+        } else {
+          escBanner.classList.remove("show");
+        }
+
+        // red flags
+        const rf = $("redFlags");
+        if (r.redFlags.length) {
+          rf.innerHTML = r.redFlags.map((x) =>
+            `<li class="red">${esc(x)}</li>`).join("");
+        } else {
+          rf.innerHTML = `<li class="hint">None flagged.</li>`;
+        }
+
+        // cited reasoning
+        const re = $("reasoning");
+        re.innerHTML = r.reasoning.map((item) => {
+          const s = sourceLabel(item.source);
+          return `<li>
+              <div>${esc(item.text)}</div>
+              <div class="cite">source:
+                <span class="src ${s.nosrc ? "nosrc" : ""}">${esc(s.text)}</span>
+              </div>
+            </li>`;
+        }).join("");
+
+        // fhir used
+        const fh = $("fhirUsed");
+        const f = r.meta.fhirUsedStructured || {};
+        const conds = (f.conditions || []).map((c) =>
+          `<div class="fhir-item"><b>Condition:</b> ${esc(c.display)} <span class="kv">(ICD-10 ${esc(c.icd10)})</span></div>`).join("");
+        const alg = (f.allergies || []).map((a) =>
+          `<div class="fhir-item"><b>Allergy:</b> ${esc(a.display)} <span class="kv">(${esc(a.criticality)})</span></div>`).join("");
+        const obs = (f.observations || []).map((o) =>
+          `<div class="fhir-item"><b>${esc(o.display)}:</b> ${esc(o.value || "—")}</div>`).join("");
+        const head = `<div class="fhir-item"><b>Patient:</b> ${esc(f.name)} · ${esc(f.gender)} · age ${esc(f.age)}</div>`;
+        fh.innerHTML = head + conds + alg + obs;
+
+        $("disclaimer").innerHTML =
+          `<strong>Disclaimer:</strong> ${esc(r.disclaimer)}`;
+        $("meta").textContent =
+          "provider: " + r.meta.provider + " · retrieved: " +
+          (r.meta.retrievedSnippets.join(", ") || "none") +
+          (r.meta.modelError ? " · model error: " + r.meta.modelError : "");
+
+        $("results").classList.add("show");
+      }
+
+      $("go").addEventListener("click", run);
+      $("symptom").addEventListener("keydown", (e) => {
+        if ((e.metaKey || e.ctrlKey) && e.key === "Enter") run();
+      });
+    </script>
+  </body>
+</html>

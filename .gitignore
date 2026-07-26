@@ -1,0 +1,18 @@
+# dependencies — none (zero runtime deps; Node standard library only)
+node_modules/
+
+# secrets — never commit
+.env
+.env.local
+.env.*.local
+
+# logs / runtime
+*.log
+npm-debug.log*
+
+# os / editor noise
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.swp

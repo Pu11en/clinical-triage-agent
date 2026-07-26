@@ -1,0 +1,152 @@
+[
+  {
+    "id": "acs-chest-pain",
+    "topic": "Acute coronary syndrome / chest pain",
+    "text": "Chest pain or pressure with radiation to arm, neck, or jaw, diaphoresis, dyspnea, nausea, or lightheadedness is a cardiac red flag and warrants emergency evaluation. Time to reperfusion is critical. Do not attribute atypical presentations to non-cardiac causes without evaluation.",
+    "source": "AHA/ACC Chest Pain Guideline"
+  },
+  {
+    "id": "stroke-fast",
+    "topic": "Stroke (F.A.S.T.)",
+    "text": "Sudden facial droop, unilateral arm weakness or numbness, slurred or difficult speech, or sudden severe headache are stroke warning signs. Note time of symptom onset. Treat as a time-critical emergency; call emergency services immediately.",
+    "source": "American Stroke Association — F.A.S.T."
+  },
+  {
+    "id": "anaphylaxis",
+    "topic": "Anaphylaxis",
+    "text": "Acute onset of urticaria or angioedema with respiratory compromise (stridor, wheeze, dyspnea) or hypotension after an exposure is anaphylaxis. Epinephrine is first-line and time-critical. Proceed to emergency care; do not delay for antihistamines.",
+    "source": "WAO Anaphylaxis Guidance"
+  },
+  {
+    "id": "pulmonary-embolism",
+    "topic": "Pulmonary embolism",
+    "text": "Sudden onset dyspnea with pleuritic chest pain, hemoptysis, tachycardia, or syncope, especially with immobility, recent surgery, or malignancy, is a PE red flag and requires emergency evaluation.",
+    "source": "ESC Acute Pulmonary Embolism Guideline"
+  },
+  {
+    "id": "severe-respiratory-distress",
+    "topic": "Severe respiratory distress",
+    "text": "Respiratory rate over 30, oxygen saturation below 90% on room air, accessory muscle use, inability to speak in full sentences, or cyanosis are signs of respiratory failure. Treat as an emergency.",
+    "source": "ATS Respiratory Failure Criteria"
+  },
+  {
+    "id": "suicidal-ideation",
+    "topic": "Suicidal ideation / self-harm",
+    "text": "Active suicidal ideation, a plan, intent, access to means, or recent self-harm is a psychiatric emergency. Do not leave the person alone; remove access to means; contact emergency services or a crisis line (988 in the US) and arrange urgent evaluation.",
+    "source": "SAMHSA / Columbia Suicide Severity Scale"
+  },
+  {
+    "id": "asthma-exacerbation",
+    "topic": "Asthma exacerbation",
+    "text": "A severe asthma exacerbation presents with inability to speak full sentences, respiratory rate over 30, heart rate over 120, or oxygen saturation below 90%. These warrant emergency care. Mild exacerbations may use a reliever inhaler and seek same-day review.",
+    "source": "GINA Asthma Management Strategy"
+  },
+  {
+    "id": "copd-exacerbation",
+    "topic": "COPD exacerbation",
+    "text": "An acute COPD exacerbation is increased dyspnea, sputum volume, or sputum purulence. Severe exacerbations with confusion, cyanosis, or SpO2 below 88% require emergency care; milder cases may warrant urgent clinical review.",
+    "source": "GOLD COPD Report"
+  },
+  {
+    "id": "sepsis",
+    "topic": "Sepsis",
+    "text": "Suspect sepsis with new confusion or disorientation, respiratory rate of 22 or higher, or systolic blood pressure of 100 or lower (qSOFA). Combine with suspected infection. Sepsis is a time-critical emergency.",
+    "source": "Surviving Sepsis Campaign"
+  },
+  {
+    "id": "hypertensive-emergency",
+    "topic": "Hypertensive emergency",
+    "text": "Blood pressure of 180/120 mmHg or higher with acute target-organ damage (chest pain, dyspnea, severe headache, neurologic deficit, visual changes, or acute kidney injury) is a hypertensive emergency. Asymptomatic severe elevation without organ damage is usually urgent, not emergent.",
+    "source": "AHA Hypertension Guideline"
+  },
+  {
+    "id": "dka",
+    "topic": "Diabetic ketoacidosis",
+    "text": "Hyperglycemia with ketones, acidosis, nausea, vomiting, abdominal pain, fruity breath, or altered mental status is DKA. Treat as an emergency and arrange IV fluids and insulin per protocol.",
+    "source": "ADA Diabetes Care Standards — DKA"
+  },
+  {
+    "id": "hypoglycemia",
+    "topic": "Severe hypoglycemia",
+    "text": "Glucose below 70 mg/dL with symptoms, or any low glucose causing confusion, seizure, or loss of consciousness, is an emergency. If conscious, give 15 g fast-acting carbohydrate and recheck in 15 minutes. Severe events need emergency care.",
+    "source": "ADA Diabetes Care Standards — Hypoglycemia"
+  },
+  {
+    "id": "gi-bleed",
+    "topic": "Acute gastrointestinal bleeding",
+    "text": "Hematemesis, melena, or large-volume hematochezia with lightheadedness, syncope, or hemodynamic instability is an acute GI bleed and an emergency. Stable melena warrants urgent evaluation.",
+    "source": "ACG Gastrointestinal Bleeding Guideline"
+  },
+  {
+    "id": "appendicitis",
+    "topic": "Appendicitis",
+    "text": "Abdominal pain migrating to the right lower quadrant with rebound tenderness, guarding, fever, nausea, or anorexia suggests appendicitis. Arrange urgent evaluation; rupture risk increases with delay.",
+    "source": "ACEP Appendicitis Clinical Policy"
+  },
+  {
+    "id": "pyelonephritis",
+    "topic": "Pyelonephritis",
+    "text": "Fever, flank or back pain, rigors, nausea, or vomiting with urinary symptoms suggests upper urinary tract infection. Hemodynamically unstable or pregnant patients need emergency care; otherwise urgent evaluation.",
+    "source": "IDSA Complicated UTI Guidance"
+  },
+  {
+    "id": "meningitis",
+    "topic": "Meningitis / meningococcal disease",
+    "text": "Fever with neck stiffness, photophobia, altered mental status, or a rapidly progressive petechial or purpuric rash suggests meningitis or meningococcemia. Treat as an emergency; antibiotics must not be delayed.",
+    "source": "WHO Meningitis Guidance"
+  },
+  {
+    "id": "thunderclap-headache",
+    "topic": "Subarachnoid hemorrhage / thunderclap headache",
+    "text": "A sudden, maximal-at-onset 'thunderclap' or worst-ever headache, especially with neck stiffness, vomiting, or altered consciousness, is a subarachnoid hemorrhage red flag and an emergency.",
+    "source": "AHA/American Stroke Association — SAH"
+  },
+  {
+    "id": "ectopic-pregnancy",
+    "topic": "Ectopic pregnancy",
+    "text": "Abdominal or pelvic pain with vaginal spotting in a patient who could be pregnant, especially with dizziness or shoulder-tip pain, suggests ectopic pregnancy and rupture risk. Treat as an emergency.",
+    "source": "ACOG Ectopic Pregnancy Guidance"
+  },
+  {
+    "id": "cauda-equina",
+    "topic": "Cauda equina syndrome",
+    "text": "New urinary retention or incontinence, fecal incontinence, saddle anesthesia, or progressive bilateral leg weakness with back pain suggests cauda equina syndrome. Treat as a surgical emergency.",
+    "source": "NICE Low Back Pain Guideline"
+  },
+  {
+    "id": "htn-routine",
+    "topic": "Hypertension (routine management)",
+    "text": "Controlled or mildly elevated blood pressure without symptoms is managed with lifestyle modification and follow-up. Target generally below 130/80 mmHg for most adults with cardiovascular risk. Routine follow-up is appropriate when asymptomatic.",
+    "source": "AHA/ACC Hypertension Guideline"
+  },
+  {
+    "id": "diabetes-routine",
+    "topic": "Type 2 diabetes (routine management)",
+    "text": "Stable type 2 diabetes is managed with lifestyle, metformin first-line, and additional agents guided by comorbidity. A reasonable glycemic target is HbA1c below 7.0% for many adults, individualized. Routine follow-up is appropriate when asymptomatic and stable.",
+    "source": "ADA Standards of Care in Diabetes"
+  },
+  {
+    "id": "hyperlipidemia-routine",
+    "topic": "Hyperlipidemia (routine management)",
+    "text": "Elevated cholesterol is managed with statin therapy stratified by cardiovascular risk and lifestyle modification. Routine follow-up is appropriate; report muscle pain or weakness to a clinician.",
+    "source": "AHA/ACC Cholesterol Guideline"
+  },
+  {
+    "id": "uri-common-cold",
+    "topic": "Upper respiratory infection / common cold",
+    "text": "Nasal congestion, sore throat, cough, and low-grade fever for less than a week are typical of a viral upper respiratory infection. Symptomatic self-care (rest, fluids) is appropriate. Seek care for high fever, shortness of breath, or symptoms beyond 10 days.",
+    "source": "CDC Common Cold Guidance"
+  },
+  {
+    "id": "minor-wound",
+    "topic": "Minor cuts and lacerations",
+    "text": "Small, clean, shallow wounds with controlled bleeding may be managed with cleaning and a dressing. Seek care for deep wounds, uncontrolled bleeding, signs of infection, or if a tetanus booster may be needed.",
+    "source": "CDC Wound Care Guidance"
+  },
+  {
+    "id": "gastroenteritis",
+    "topic": "Acute gastroenteritis",
+    "text": "Acute diarrhea and vomiting without severe dehydration, blood in stool, high fever, or severe pain is usually viral and managed with oral rehydration. Seek urgent care for signs of dehydration, bloody stools, or persistent high fever.",
+    "source": "WHO Acute Diarrheal Disease Guidance"
+  }
+]

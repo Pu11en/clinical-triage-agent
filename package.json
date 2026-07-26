@@ -1,0 +1,27 @@
+{
+  "name": "clinical-triage-agent",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Cited, safety-routed, FHIR-native clinical triage agent demo powered by GLM-5.2 (Z.AI). Synthetic data only — not for real clinical use.",
+  "license": "Apache-2.0",
+  "author": "Drew Pullen (https://github.com/Pu11en)",
+  "engines": { "node": ">=18.17" },
+  "main": "server.mjs",
+  "scripts": {
+    "start": "node server.mjs",
+    "triage": "node cli.mjs",
+    "check": "node --check server.mjs && node --check cli.mjs && node --check lib/triage.mjs && node --check lib/retrieve.mjs && node --check lib/redflags.mjs",
+    "test:emergency": "node cli.mjs \"crushing chest pain and shortness of breath\""
+  },
+  "keywords": [
+    "clinical-triage",
+    "fhir",
+    "rag",
+    "glm-5.2",
+    "z-ai",
+    "safety-routed",
+    "medical-ai",
+    "agent"
+  ]
+}
